@@ -1,4 +1,4 @@
 const Cmovies = require("./movies");
-module.exports = {
+module.exports = [
   Cmovies
-};
+];
