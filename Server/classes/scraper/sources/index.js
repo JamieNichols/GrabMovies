@@ -1,4 +1,5 @@
-const Cmovies = require("./movies");
+const Vidcloud = require("./vidcloud");
+console.log(Vidcloud);
 module.exports = [
-  Cmovies
+  Vidcloud
 ];

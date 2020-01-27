@@ -1,28 +1,25 @@
 const puppeteer = require('puppeteer');
+const looksSame = require("looks-same");
+
 
 class Source {
   /**
    * @override
    */
+  poster;
   baseUrl = null;
-  constructor(_baseUrl) {
-
-    console.log("super running");
+  constructor(poster) {
+    this.puppeteer = puppeteer;
   }
   /**
    * @override
    * 
    */
-  getList(query) {
-    puppeteer.launch().then(async browser => {
-      const page = await browser.newPage();
-      await page.goto(this.baseUrl);
-      page.screenshot({ path: "captured.png" });
-      // other actions...
-
-      await browser.close();
-    });
+  
+  looksSame(result_poster) {
+    return looksSame(result_poster, this.poster);
   }
+  
 }
 
-module.exports = { Source };
+module.exports = Source;

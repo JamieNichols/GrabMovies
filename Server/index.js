@@ -14,8 +14,8 @@ const apis = require("./classes/apis");
 const express = require("express");
 const app = express();
 const port = 80;
-const runner = (api, params) => {
-  apis[api](params);
+const runner = (api, query) => {
+  apis[api](query);
 };
 
 const Authenticate = headers => {
