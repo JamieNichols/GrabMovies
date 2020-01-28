@@ -1,13 +1,11 @@
 const Sources = require("../scraper/sources");
-const Movies = query => {
-  Sources.map((Source, index) => {
-    console.log("index", index, Source);
+const Movies = async (res,query) => {
+  return Sources.map((Source) => {
     const source = new Source();
-    source.getCandidates(query).then(results => {
-      console.log(results);
-    });
+    const results = source.getCandidates(res,query);
+    return results;
   });
 
-};
+}; 
 
 module.exports = Movies;

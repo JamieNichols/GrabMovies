@@ -1,6 +1,5 @@
 const Shows = query => {
-  //New Restful api
-  console.log(query);
+  //New Restful apie
 };
 
 module.exports = Shows;
