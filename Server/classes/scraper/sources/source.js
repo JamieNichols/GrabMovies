@@ -1,25 +1,16 @@
-const puppeteer = require('puppeteer');
+const Nightmare = require("nightmare");
 const looksSame = require("looks-same");
-
-
 class Source {
+  constructor() {}
   /**
    * @override
    */
-  poster;
   baseUrl = null;
-  constructor(poster) {
-    this.puppeteer = puppeteer;
+  nightmare = Nightmare({ show: true });
+
+  static verifyPoster(tmdb, source) {
+    return looksSame(tmdb, source);
   }
-  /**
-   * @override
-   * 
-   */
-  
-  looksSame(result_poster) {
-    return looksSame(result_poster, this.poster);
-  }
-  
 }
 
 module.exports = Source;

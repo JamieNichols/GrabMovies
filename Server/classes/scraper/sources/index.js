@@ -1,4 +1,3 @@
 const Vidcloud = require("./vidcloud");
-module.exports = [
-  Vidcloud
-];
+const YTS = require("./YTS");
+module.exports = [Vidcloud];

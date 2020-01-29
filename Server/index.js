@@ -15,16 +15,16 @@ const express = require("express");
 const app = express();
 const port = 80;
 
-
 const Authenticate = headers => {
   return true;
 };
 app.get("/api/*", (req, res) => {
-   const { path, query } = req;
+  const { path, query } = req;
   const api = path.split("/")[2];
-  if (Authenticate(req.headers)) apis[api](query).then(results=>{
-    res.send(JSON.stringify(results));
-  });
+  if (Authenticate(req.headers))
+    apis[api](query).then(results => {
+      res.send(JSON.stringify(results));
+    });
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}.`));
