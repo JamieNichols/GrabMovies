@@ -5,15 +5,15 @@ const resolver = {
     /**
      * To Finish Tonight
      */
-    movie: async (root, { imdb_id, title }) => {
+    movie: (root, { imdb_id, title }) => {
       return imdb_id
-        ? await wrapper.getMovieById(imdb_id)
-        : await wrapper.getMovieByTitle(title);
+        ? wrapper.getMovieById(imdb_id)
+        : wrapper.getMovieByTitle(title);
     }
   },
   Movie: {
-    title: async ({ imdb_id }) => {
-      const { title } = await wrapper.getMovieById(imdb_id);
+    title: ({ imdb_id }) => {
+      const { title } = wrapper.getMovieById(imdb_id);
       return title;
     }
   }

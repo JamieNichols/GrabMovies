@@ -1,32 +1,25 @@
 const { keys } = require("./config");
 const { RESTDataSource } = require("apollo-datasource-rest");
-
 const endpoints = {
   yts: "https://yts.ms/api/v2/search?q=",
   omdb: {
-    movie_search: `http://www.omdbapi.com/?apikey=${keys}&`
+    movie_search: `http://www.omdbapi.com/?apikey=${keys.omdb}&`
   }
 };
 
 class ApiWrapper extends RESTDataSource {
   constructor() {
     super();
+    this.baseURL = endpoints.omdb.movie_search;
   }
 
-  getMovieById(_imdb_id) {
-    return {
-      imdb_id: _imdb_id,
-      title: "Men in Black",
-      year: "test"
-    };
+  async getMovieById(_imdb_id) {
+    return JSON.stringify(await this.get(`i=${_imdb_id}`));
   }
 
-  getMovieByTitle(_title) {
-    return {
-      imdb_id: "tt123456",
-      title: _title,
-      year: "test"
-    };
+  async getMovieByTitle(_title) {
+    this.baseURL = endpoints.omdb.movie_search;
+    return this.get(`t=${_title}`);
   }
 }
 
