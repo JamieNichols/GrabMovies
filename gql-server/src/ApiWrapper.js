@@ -1,5 +1,7 @@
 const { keys } = require("./config");
 const { RESTDataSource } = require("apollo-datasource-rest");
+const fetch = require("node-fetch");
+
 const endpoints = {
   yts: "https://yts.ms/api/v2/search?q=",
   omdb: {
@@ -14,6 +16,7 @@ class ApiWrapper extends RESTDataSource {
   }
 
   async getMovieById(_imdb_id) {
+    console.log(this.get("http://google.com"));
     return JSON.stringify(await this.get(`i=${_imdb_id}`));
   }
 

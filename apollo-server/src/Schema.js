@@ -2,7 +2,22 @@ const { gql } = require("apollo-server-express");
 // GraphQL Schema
 const typeDefs = gql`
   type Query {
-    Movie(imdbID: String, Title: String): Movie
+    Movie(
+      imdbID: String
+      Title: String
+      tmdbID: Int
+      Facebook: String
+      Instagram: String
+      Twitter: String
+    ): Movie
+    Movies(
+      imdbID: String
+      Title: String
+      tmdbID: Int
+      Facebook: String
+      Instagram: String
+      Twitter: String
+    ): [Movie]
   }
 
   type Movie {
@@ -37,10 +52,10 @@ const typeDefs = gql`
 
     #CUSTOM API
     Images: [ImageSet]
-    cast: [Actor]
+    cast: [Person]
     clips: [String]
     trailers: [Trailer]
-    Staring: [Actor]
+    Staring: [Person]
     torrents: [Torrent]
     stream_sites: [String]
     stream_urls: [String]
@@ -63,7 +78,6 @@ const typeDefs = gql`
     name: Name
     age: Int
     movies: [Movie]
-    shows: [Show]
     awards: [String]
     photos: [Image]
     knownfor: [Movie]

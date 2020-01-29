@@ -12,7 +12,19 @@ const { ApolloServer, gql } = require("apollo-server-express");
 const resolvers = require("./src/Resolver");
 const typeDefs = require("./src/Schema");
 
-const server = new ApolloServer({ typeDefs, resolvers });
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  dataSources: () => {
+    return {
+      moviesAPI: new MoviesAPI(),
+      personalizationAPI: new PersonalizationAPI(),
+    }
+  },
+  context: () => {
+    return {
+      token: 'foo',
+    };});
 
 const app = express();
 server.applyMiddleware({ app });
