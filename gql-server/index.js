@@ -7,27 +7,16 @@ https://www.npmjs.com/package/webtorrent
 https://www.npmjs.com/package/nightmare-upload
 https://www.imdb.com/title/tt7286456/?ref_=hm_fanfav_tt_2_pd_fp1
 */
-
 const express = require("express");
-const express_graphql = require("express-graphql");
-require("graphql");
+const { ApolloServer, gql } = require("apollo-server-express");
+const resolvers = require("./src/Resolver");
+const typeDefs = require("./src/Schema");
 
-const schema = require("./src/Schema");
-const rootValue = require("./src/Resolver");
-//Show Graphiql
-const graphiql = true;
+const server = new ApolloServer({ typeDefs, resolvers });
 
-// Create an express server and GraphQl endpoint
 const app = express();
-app.use(
-  "/graphql",
-  express_graphql({
-    schema,
-    rootValue,
-    graphiql
-  })
-);
+server.applyMiddleware({ app });
 
-app.listen(3000, () =>
-  console.log("Express server is running on 3000 with graphql")
+app.listen({ port: 4000 }, () =>
+  console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
 );

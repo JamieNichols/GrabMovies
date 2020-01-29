@@ -1,17 +1,21 @@
-const wrapper = require("./ApiWrapper");
-
+const ApiWrapper = require("./ApiWrapper");
+const wrapper = new ApiWrapper();
 const resolver = {
   Query: {
     /**
-     * @todo
-     *
-     **/
-    Movies: wrapper.getMovies,
-
-    /**
      * To Finish Tonight
      */
-    Movie: wrapper.getMovie
+    movie: async (root, { imdb_id, title }) => {
+      return imdb_id
+        ? await wrapper.getMovieById(imdb_id)
+        : await wrapper.getMovieByTitle(title);
+    }
+  },
+  Movie: {
+    title: async ({ imdb_id }) => {
+      const { title } = await wrapper.getMovieById(imdb_id);
+      return title;
+    }
   }
 };
 

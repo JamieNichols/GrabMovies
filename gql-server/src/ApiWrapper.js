@@ -13,10 +13,20 @@ class ApiWrapper extends RESTDataSource {
     super();
   }
 
-  //Public Methods
-  getMovie(root, args, context) {
-    if (args.imdb_code) {
-    }
+  getMovieById(_imdb_id) {
+    return {
+      imdb_id: _imdb_id,
+      title: "Men in Black",
+      year: "test"
+    };
+  }
+
+  getMovieByTitle(_title) {
+    return {
+      imdb_id: "tt123456",
+      title: _title,
+      year: "test"
+    };
   }
 }
 
