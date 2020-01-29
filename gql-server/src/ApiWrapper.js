@@ -1,4 +1,5 @@
 const { keys } = require("./config");
+const { RESTDataSource } = require("apollo-datasource-rest");
 
 const endpoints = {
   yts: "https://yts.ms/api/v2/search?q=",
@@ -7,8 +8,10 @@ const endpoints = {
   }
 };
 
-class ApiWrapper {
-  constructor() {}
+class ApiWrapper extends RESTDataSource {
+  constructor() {
+    super();
+  }
 
   //Public Methods
   getMovie(root, args, context) {
