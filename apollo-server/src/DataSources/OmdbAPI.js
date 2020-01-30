@@ -9,7 +9,6 @@ class OmdbAPI extends MyDataSource {
   }
 
   async getMovieByTitle(_title) {
-    console.log(_title);
     return await this.get({ t: _title });
   }
 }

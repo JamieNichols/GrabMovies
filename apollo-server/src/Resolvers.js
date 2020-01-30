@@ -14,9 +14,9 @@ const resolvers = {
       return await adult;
     },
 
-    backdrop_path: async ({ id }, params, { dataSources }) => {
+    backdrop: async ({ id }, params, { dataSources }) => {
       const { backdrop_path } = await dataSources.TmdbAPI.getMovieById(id);
-      return await backdrop_path;
+      return await dataSources.TmdbAPI.getImageSizes(await backdrop_path);
     },
 
     belongs_to_collection: async ({ id }, params, { dataSources }) => {
@@ -143,6 +143,15 @@ const resolvers = {
     year: async ({ id }, params, { dataSources }) => {
       const { release_date } = await dataSources.TmdbAPI.getMovieById(id);
       return await release_date.split("-")[0];
+    },
+
+    rated: async ({ title }, params, { dataSources }) => {
+      const { Rated } = await dataSources.OmdbAPI.getMovieByTitle(title);
+      return await Rated;
+    },
+
+    torrents: async ({ title }, params, { dataSources }) => {
+      return await dataSources.YFTAPI.getTorrents(title);
     }
   }
 };

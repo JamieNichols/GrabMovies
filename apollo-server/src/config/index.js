@@ -8,6 +8,11 @@ const DataSourceConfigs = {
     base: "https://api.themoviedb.org/3/",
     key_name: "api_key",
     key_value: "e8be92e5033230687ec1953e7045db83"
+  },
+  yft: {
+    base: "https://yts.ms/",
+    key_name: "",
+    key_value: ""
   }
 };
 

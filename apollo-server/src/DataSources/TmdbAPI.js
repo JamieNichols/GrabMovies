@@ -27,6 +27,17 @@ class TmdbAPI extends MyDataSource {
   }
 
   async getImagesByMovieId(id) {}
+
+  async getImageSizes(path) {
+    const config = await this.getConfig();
+    const sizes = await config.images.backdrop_sizes;
+    return await {
+      small: (await config.images.base_url) + (await sizes[0]) + (await path),
+      medium: (await config.images.base_url) + (await sizes[1]) + (await path),
+      large: (await config.images.base_url) + (await sizes[2]) + (await path),
+      original: (await config.images.base_url) + (await sizes[2]) + (await path)
+    };
+  }
 }
 
 String.prototype.toArray = function() {

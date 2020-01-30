@@ -7,7 +7,7 @@ const typeDefs = gql`
 
   type Movie {
     adult: Boolean
-    backdrop_path: String
+    backdrop: ImagePaths
     belongs_to_collection: Collection
     budget: Int
     genre: [Genre]
@@ -18,7 +18,7 @@ const typeDefs = gql`
     original_title: String
     overview: String
     popularity: Int
-    poster_path: String
+    poster_path: Image
     production_companies: [ProductionCompany]
     production_countries: [Country]
     release_date: String
@@ -29,10 +29,11 @@ const typeDefs = gql`
     tagline: String
     title: String
     video: Boolean
-    vote_average: Float
-    vote_count: Int
-    year: Int
-    rated: String
+    vote_average: Float #added
+    vote_count: Int #added
+    #start of extra data
+    year: Int #added
+    rated: String #added
     directors: [Person]
     writers: [Person]
     cast: [Person]
@@ -84,9 +85,16 @@ const typeDefs = gql`
     posters: [Image]
   }
 
+  type ImagePaths {
+    small: String
+    medium: String
+    large: String
+    original: String
+  }
+
   type Image {
     aspect_ratio: Int
-    file_path: String
+    file_path: ImagePaths
     height: Int
     iso_639_1: String
     vote_average: Int
@@ -112,10 +120,11 @@ const typeDefs = gql`
   }
 
   type Torrent {
-    magnet: String
-    direct_download: String
+    path: String
+    type: String
+    quality: String
     seeds: Int
-    leachers: Int
+    leechers: Int
   }
 
   type Video {
