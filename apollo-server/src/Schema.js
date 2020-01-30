@@ -2,105 +2,113 @@ const { gql } = require("apollo-server-express");
 // GraphQL Schema
 const typeDefs = gql`
   type Query {
-    Movie(imdbID: String, Title: String, id: Int): Movie
+    Movie(imdbID: String, title: String, id: Int): Movie
   }
 
   type Movie {
-    #OMDB API
-
-    Title: String
-    Year: Int
-    Rated: String
-    Released: String
-    Runtime: String
-    Genre: [String]
-    Directors: [Person]
-    Writers: [Person]
-    Cast: [Person]
-    Plot: String
-    Languages: [String]
-    Country: String
-    Awards: [String]
-    Poster: String
-    Ratings: [Source]
-    Metascore: Int
+    adult: Boolean
+    backdrop_path: String
+    belongs_to_collection: Collection
+    budget: Int
+    genre: [Genre]
+    homepage: String
+    id: Int
+    imdb_id: String
+    original_language: String
+    original_title: String
+    overview: String
+    popularity: Int
+    poster_path: String
+    production_companies: [ProductionCompany]
+    production_countries: [Country]
+    release_date: String
+    revenue: Int
+    runtime: String
+    spoken_languages: [Language]
+    status: String
+    tagline: String
+    title: String
+    video: Boolean
+    vote_average: Float
+    vote_count: Int
+    year: Int
+    rated: String
+    directors: [Person]
+    writers: [Person]
+    cast: [Person]
+    plot: String
+    country: String
+    awards: [String]
+    metascore: Int
     imdbRating: Float
     imdbVotes: Int
-    imdbID: String
-    Type: String
-    DVD: String
-    BoxOffice: String
-    Production: String
-    Website: String
-    Response: Boolean
-    #END OMDB API
-
-    #CUSTOM API
-    Images: [ImageSet]
-    cast: [Person]
-    clips: [String]
-    trailers: [Trailer]
-    Staring: [Person]
+    type: String
+    dvd: String
+    boxOffice: String
+    response: Boolean
+    images: ImageSet
+    videos: [Video]
     torrents: [Torrent]
+    Staring: [Person]
     stream_sites: [String]
     stream_urls: [String]
-    Status: String
+    alternative_titles: [AlternativeTitle]
   }
 
-  type Season {
-    episodes: [Episode]
-    air_date: String
-    end_date: String
+  type AlternativeTitle {
+    iso_3166_1: String
+    title: String
+    type: String
   }
 
-  type Episode {
-    Title: String
-    summary: String
-    air_date: String
+  type Collection {
+    id: Int
+    name: String
+    poster_path: String
+    backdrop_path: String
+  }
+
+  type Country {
+    iso_639_1: String
+    name: String
+  }
+
+  type Genre {
+    id: Int
+    name: String
+  }
+
+  type ImageSet {
+    id: Int
+    backdrops: [Image]
+    posters: [Image]
+  }
+
+  type Image {
+    aspect_ratio: Int
+    file_path: String
+    height: Int
+    iso_639_1: String
+    vote_average: Int
+    vote_count: Int
+    width: Int
+  }
+
+  type Language {
+    iso_639_1: String
+    name: String
   }
 
   type Person {
-    name: Name
-    age: Int
-    movies: [Movie]
-    awards: [String]
-    photos: [Image]
-    knownfor: [Movie]
-    bio: String
-    personal: PersonalData
+    id: Int
+    name: String
   }
 
-  type PersonalData {
-    knownfor: String
-    gender: String
-    known_credits: Int
-    birthday: String
-    place_of_birth: Place
-    official_site: String
-  }
-
-  type Place {
-    city: String
-    state: String
-    country: String
-  }
-
-  type Name {
-    first: String
-    middle: String
-    last: String
-  }
-
-  type Clip {
-    Title: String
-    description: String
-    url: String
-  }
-
-  type Trailer {
-    Title: String
-    path: String
-    length: Int
+  type ProductionCompany {
+    id: Int
+    logo_path: String
+    name: String
+    origin_country: String
   }
 
   type Torrent {
@@ -110,25 +118,18 @@ const typeDefs = gql`
     leachers: Int
   }
 
-  type ImageSet {
-    small: Image
-    mediume: Image
-    large: Image
+  type Video {
+    id: Int
+    iso_639_1: String
+    iso_3166_1: String
+    key: String
+    name: String
+    site: String
+    size: Int
+    type: String
   }
-
-  type Image {
-    size: Size
-    path: String
-  }
-
-  type Size {
-    width: Int
-    height: Int
-  }
-
-  type Source {
-    Source: String
-    Value: String
+  schema {
+    query: Query
   }
 `;
 module.exports = typeDefs;

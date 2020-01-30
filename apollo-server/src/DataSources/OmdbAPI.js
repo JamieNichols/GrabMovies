@@ -4,8 +4,8 @@ class OmdbAPI extends MyDataSource {
   constructor(config) {
     super(config);
   }
-  async getMovieById(_imdb_id) {
-    return await this.get({ i: _imdb_id });
+  async getMovieById(imdb_id) {
+    return await this.get({ i: imdb_id });
   }
 
   async getMovieByTitle(_title) {

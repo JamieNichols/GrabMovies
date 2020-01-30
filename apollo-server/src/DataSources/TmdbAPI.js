@@ -13,18 +13,20 @@ class TmdbAPI extends MyDataSource {
     return await super.get(params, endpoint);
   }
   async getMovieById(id) {
-    console.log(id);
     return await this.get({}, "movie/" + id);
   }
+  //Main Functions for getting Movie Data
   async findByExternalID(external_source, external_id) {
     return await this.get({ external_source }, "find/" + id);
   }
+
   async getMovieByTitle(_title) {
     const { results } = await this.get({ query: _title }, "search/movie");
-    console.log(await results);
-    const { id } = await results;
+    const { id } = await results[0];
     return await this.getMovieById(id);
   }
+
+  async getImagesByMovieId(id) {}
 }
 
 String.prototype.toArray = function() {
