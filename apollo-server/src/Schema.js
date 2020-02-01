@@ -49,10 +49,11 @@ const typeDefs = gql`
     response: Boolean
     images: ImageSet
     videos: [Video]
-    torrents: [Torrent]
+    torrents(min_quality: String, min_seed: Int, languages: String): [Torrent]
     Staring: [Person]
     stream_sites: [String]
     stream_urls: [String]
+    stream_sources: [StreamSource]
     alternative_titles: [AlternativeTitle]
   }
 
@@ -120,11 +121,13 @@ const typeDefs = gql`
   }
 
   type Torrent {
-    path: String
-    type: String
+    language: String
+    url: String
     quality: String
-    seeds: Int
-    leechers: Int
+    seed: Int
+    peer: Int
+    size: Int
+    provider: String
   }
 
   type Video {
@@ -136,6 +139,11 @@ const typeDefs = gql`
     site: String
     size: Int
     type: String
+  }
+  type StreamSource {
+    path: String
+    source_type: String
+    qualities: [String]
   }
   schema {
     query: Query

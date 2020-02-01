@@ -8,7 +8,10 @@ class MyDataSource extends RESTDataSource {
   }
 
   async get(params, endpoint = "") {
-    var str = `${endpoint}?${this.api.key_name}=${this.api.key_value}`;
+    let str = endpoint;
+    if (this.api.key_name.length > 0) {
+      str = `${endpoint}?${this.api.key_name}=${this.api.key_value}`;
+    }
     for (var key in params) {
       if (str != "") {
         str += "&";

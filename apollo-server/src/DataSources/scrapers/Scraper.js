@@ -1,5 +1,6 @@
+const MyDataSource = require("../MyDataSource");
 const Nightmare = require("nightmare");
-class Source {
+class Scraper extends MyDataSource {
   constructor() {}
   /**
    * @override
@@ -8,4 +9,4 @@ class Source {
   nightmare = Nightmare({ show: true });
 }
 
-module.exports = Source;
+module.exports = Scraper;

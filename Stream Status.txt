@@ -1,0 +1,24 @@
+1/31/2020
+Yify, Webtorrents, React, Graphql, Apollo Server, What do these all have in common?
+
+Me Baby!!
+Hey My People! Midnight EST I'm Going LIVE!! (on twitch): http://twitch.tv/jamie_337_nichols 
+Tonight I'm starting to work on the front end of the GrabMovies App. I've been getting the framework made for the back-end of the app by wrapping TMDB's REST API with Graphql!! and its been a frustrating and rewarding experience. Now that I've got the base functionality worked out its time for me to start on some front end functionality. I'm thinking WEBTORRENT Movie Player!!!!. Lets see if we can use Graphql to get web torrents and stream them! 
+Come hang out and watch me WIN BIG or FAIL HARD. Either way i'll try to engage and entertain.  Bring the popcorn and don't forget your 2 cents. 
+        
+Facebook
+
+Group:
+Javascript              Status:1
+Node.js Developers      Status:3 - Requested to join
+React Developers        Status:1
+HTML CSS JAVASCRIPT     Status:1
+
+Reddit
+
+SubReddits:
+learnprogramminng       Status:86
+programming             Status:1
+javascript              Status:
+reactjs                 Status:1
+webdevelopment          Status:1

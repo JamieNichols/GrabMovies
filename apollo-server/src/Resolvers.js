@@ -20,10 +20,10 @@ const resolvers = {
     },
 
     belongs_to_collection: async ({ id }, params, { dataSources }) => {
-      const { belongs_to_colletion } = await dataSources.TmdbAPI.getMovieById(
+      const { belongs_to_collection } = await dataSources.TmdbAPI.getMovieById(
         id
       );
-      return await belongs_to_colletion;
+      return await belongs_to_collection;
     },
 
     budget: async ({ id }, params, { dataSources }) => {
@@ -150,8 +150,28 @@ const resolvers = {
       return await Rated;
     },
 
-    torrents: async ({ title }, params, { dataSources }) => {
-      return await dataSources.YFTAPI.getTorrents(title);
+    torrents: async ({ imdb_id }, filters, { dataSources }) => {
+      return await dataSources.PopcornAPI.getTorrents(imdb_id).then(
+        torrents => {
+          let filtered = torrents;
+          if (filters.min_quality)
+            filtered = torrents.filter(
+              torrent =>
+                parseInt(torrent.quality) >= parseInt(filters.min_quality)
+            );
+          if (filters.min_seed)
+            filtered = torrents.filter(
+              torrent => parseInt(torrent.seed) >= parseInt(filters.min_seed)
+            );
+          if (filters.languages)
+            filtered = torrents.filter(
+              torrent =>
+                filters.languages &&
+                filters.languages.includes(torrent.language)
+            );
+          return filtered;
+        }
+      );
     }
   }
 };

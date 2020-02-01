@@ -5,7 +5,6 @@ class YFTAPI extends MyDataSource {
   constructor(config) {
     super(config);
   }
-
   async getTorrentPage(title) {
     const { movies } = await this.get({ q: title }, "api/v2/search");
     const { slug } = await movies[0];

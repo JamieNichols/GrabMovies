@@ -12,7 +12,9 @@
   "dependencies": {
     "apollo-datasource-rest": "^0.6.11",
     "apollo-server": "^2.9.16",
+    "cheerio": "^1.0.0-rc.3",
     "graphql": "^14.6.0",
-    "nightmare": "^3.0.2"
+    "nightmare": "^3.0.2",
+    "node-fetch": "^2.6.0"
   }
 }
