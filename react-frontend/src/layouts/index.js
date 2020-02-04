@@ -1,9 +1,11 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
+import Header from "../components/header"
+import "../components/layout.css"
 
-import Header from "./header"
-import "./layout.css"
+import { ApolloProvider } from "@apollo/react-hooks"
+import client from "../apollo/client"
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -17,7 +19,7 @@ const Layout = ({ children }) => {
   `)
 
   return (
-    <>
+    <ApolloProvider client={client}>
       <Header siteTitle={data.site.siteMetadata.title} />
       <div>
         <main>{children}</main>
@@ -27,7 +29,7 @@ const Layout = ({ children }) => {
           <a href="https://www.gatsbyjs.org">Gatsby</a>
         </footer>
       </div>
-    </>
+    </ApolloProvider>
   )
 }
 

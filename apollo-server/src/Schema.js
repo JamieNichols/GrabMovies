@@ -2,9 +2,15 @@ const { gql } = require("apollo-server-express");
 // GraphQL Schema
 const typeDefs = gql`
   type Query {
-    Movie(imdbID: String, title: String, id: Int): Movie
+    movie(imdb_id: String, title: String, id: Int): Movie
+    movies(search: String, page: Int): Movies
   }
-
+  type Movies {
+    page: Int
+    results: [Movie]
+    total_results: Int
+    total_pages: Int
+  }
   type Movie {
     adult: Boolean
     backdrop: ImagePaths
@@ -18,7 +24,7 @@ const typeDefs = gql`
     original_title: String
     overview: String
     popularity: Int
-    poster_path: Image
+    poster: ImagePaths
     production_companies: [ProductionCompany]
     production_countries: [Country]
     release_date: String

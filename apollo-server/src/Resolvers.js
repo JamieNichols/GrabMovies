@@ -1,22 +1,41 @@
 const resolvers = {
   Query: {
-    Movie: async (root, { id, title }, { dataSources }) => {
+    movie: async (root, { id, title, imdb_id }, { dataSources }) => {
       if (id) {
         return await dataSources.TmdbAPI.getMovieById(id);
       } else if (title) {
         return await dataSources.TmdbAPI.getMovieByTitle(title);
+      } else if (imdb_id) {
+        return await dataSources.TmdbAPI.getMovieByIMDBID(imdb_id);
       }
+    },
+    movies: async (root, { search, page }, { dataSources }) => {
+      return await dataSources.TmdbAPI.searchMovies(search, page);
     }
   },
+
+  Movies: {
+    page: async ({ page }) => {
+      return page;
+    },
+    results: async ({ results }) => {
+      return results;
+    },
+    total_results: async ({ total_results }) => {
+      return total_results;
+    },
+    total_pages: async ({ total_pages }) => {
+      return total_pages;
+    }
+  },
+
   Movie: {
-    adult: async ({ id }, params, { dataSources }) => {
-      const { adult } = await dataSources.TmdbAPI.getMovieById(id);
-      return await adult;
+    adult: async ({ adult }, params, { dataSources }) => {
+      return adult;
     },
 
-    backdrop: async ({ id }, params, { dataSources }) => {
-      const { backdrop_path } = await dataSources.TmdbAPI.getMovieById(id);
-      return await dataSources.TmdbAPI.getImageSizes(await backdrop_path);
+    backdrop: async ({ backdrop_path }, params, { dataSources }) => {
+      return await dataSources.TmdbAPI.getImageSizes(backdrop_path, "backdrop");
     },
 
     belongs_to_collection: async ({ id }, params, { dataSources }) => {
@@ -71,9 +90,8 @@ const resolvers = {
       return await popularity;
     },
 
-    poster_path: async ({ id }, params, { dataSources }) => {
-      const { poster_path } = await dataSources.TmdbAPI.getMovieById(id);
-      return await poster_path;
+    poster: async ({ poster_path }, params, { dataSources }) => {
+      return await dataSources.TmdbAPI.getImageSizes(poster_path, "poster");
     },
 
     production_companies: async ({ id }, params, { dataSources }) => {
@@ -150,28 +168,13 @@ const resolvers = {
       return await Rated;
     },
 
-    torrents: async ({ imdb_id }, filters, { dataSources }) => {
-      return await dataSources.PopcornAPI.getTorrents(imdb_id).then(
-        torrents => {
-          let filtered = torrents;
-          if (filters.min_quality)
-            filtered = torrents.filter(
-              torrent =>
-                parseInt(torrent.quality) >= parseInt(filters.min_quality)
-            );
-          if (filters.min_seed)
-            filtered = torrents.filter(
-              torrent => parseInt(torrent.seed) >= parseInt(filters.min_seed)
-            );
-          if (filters.languages)
-            filtered = torrents.filter(
-              torrent =>
-                filters.languages &&
-                filters.languages.includes(torrent.language)
-            );
-          return filtered;
-        }
-      );
+    torrents: async (root, filters, { dataSources }) => {
+      if (!root.imdb_id) {
+        let { imdb_id } = await dataSources.TmdbAPI.getMovieById(root.id);
+        return await dataSources.PopcornAPI.getTorrents(await imdb_id, filters);
+      } else {
+        return await dataSources.PopcornAPI.getTorrents(root.imdb_id, filters);
+      }
     }
   }
 };
