@@ -12,6 +12,7 @@ const resolvers = {
     movies: async (root, { search, page }, { dataSources }) => {
       return await dataSources.TmdbAPI.searchMovies(search, page);
     },
+    //Returns the current popular movies from https://movies.stevenlu.com/
     popular: async (root, _, { dataSources }) => {
       const pop_movies = await dataSources.PopularAPI.getMostPopular({}).then(
         movies => {
@@ -20,7 +21,6 @@ const resolvers = {
           });
         }
       );
-      console.log(pop_movies);
       return await pop_movies;
     }
   },
@@ -151,6 +151,7 @@ const resolvers = {
 
     title: async ({ id }, params, { dataSources }) => {
       const { title } = await dataSources.TmdbAPI.getMovieById(id);
+      console.log(`tile:${title}`);
       return await title;
     },
 

@@ -5,7 +5,7 @@ import { withClientState } from "apollo-link-state"
 import { ApolloLink } from "apollo-link"
 import fetch from "unfetch"
 
-const uri = "http://localhost:4000/graphql"
+const uri = "http://grabmovies.tk:4000/graphql"
 
 // ! TODO: Check if authToken expired before each request
 
