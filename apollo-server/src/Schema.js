@@ -4,6 +4,7 @@ const typeDefs = gql`
   type Query {
     movie(imdb_id: String, title: String, id: Int): Movie
     movies(search: String, page: Int): Movies
+    popular: [Movie]
   }
   type Movies {
     page: Int

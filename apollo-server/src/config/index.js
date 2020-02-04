@@ -23,6 +23,11 @@ const DataSourceConfigs = {
     base: "https://onionplay.co/",
     key_name: "",
     key_value: ""
+  },
+  popular: {
+    base: "https://s3.amazonaws.com/",
+    key_name: "",
+    key_value: ""
   }
 };
 

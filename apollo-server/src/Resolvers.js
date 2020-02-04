@@ -11,6 +11,17 @@ const resolvers = {
     },
     movies: async (root, { search, page }, { dataSources }) => {
       return await dataSources.TmdbAPI.searchMovies(search, page);
+    },
+    popular: async (root, _, { dataSources }) => {
+      const pop_movies = await dataSources.PopularAPI.getMostPopular({}).then(
+        movies => {
+          return movies.map(({ imdb_id }) => {
+            return dataSources.TmdbAPI.getMovieByIMDBID(imdb_id);
+          });
+        }
+      );
+      console.log(pop_movies);
+      return await pop_movies;
     }
   },
 
@@ -178,4 +189,5 @@ const resolvers = {
     }
   }
 };
+
 module.exports = resolvers;

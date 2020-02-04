@@ -5,7 +5,6 @@ class PopcornAPI extends MyDataSource {
     super(config);
   }
   async getTorrents(imdb_id, { min_quality, min_seed, languages }) {
-    console.log(imdb_id);
     if (imdb_id) {
       const response = await this.get({}, `movie/${imdb_id}`).then(
         ({ torrents }) => {
