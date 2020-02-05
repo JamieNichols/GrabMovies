@@ -1,6 +1,7 @@
 import React from "react"
 import { useLazyQuery } from "@apollo/react-hooks"
 import POPULAR_QUERY from "../apollo/query/POPULAR_QUERY"
+
 const Movies = props => {
   const [executeSearch, { called, loading, error, data }] = useLazyQuery(
     POPULAR_QUERY
